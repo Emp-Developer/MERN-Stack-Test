@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-export class EditTodo extends Component {
+export class Forgot extends Component {
     render() {
         return (
             <div>
-                Welcome to Edit Todo!
+                Welcome to Forgot!
             </div>
         )
     }
 }
 
-export default EditTodo
+export default Forgot
