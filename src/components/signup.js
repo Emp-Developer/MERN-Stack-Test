@@ -47,7 +47,7 @@ class Signup extends Component {
         }
         axios.post("http://localhost:4000/api/users/signup",data )
         .then((res)=>{
-            window.location.href = "/login"
+            window.location.href = "/dashboard"
         })
         .catch((e)=>{
 
@@ -55,7 +55,7 @@ class Signup extends Component {
     }
     render() {
         return (
-            <>
+            <form>
                 <h3>Sign Up</h3>
 
                 <div className="form-group">
@@ -82,7 +82,7 @@ class Signup extends Component {
                 <p className="forgot-password text-right">
                     Already registered <a href="/login">sign in?</a>
                 </p>
-        </>
+            </form>
         )
     }
 }

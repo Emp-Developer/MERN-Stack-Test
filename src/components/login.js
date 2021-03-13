@@ -2,19 +2,55 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 export class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            password: ""
+        }
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleEmailChange(e) {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    handlePasswordChange(e) {
+        this.setState({
+            password: e.target.value
+        })
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        const data = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        axios.post("http://localhost:4000/api/users/login", data)
+            .then((res) => {
+                console.log(data.email);
+                window.location.href = "/dashboard"
+            })
+            .catch((e) => {
+
+            })
+    }
     render() {
         return (
-            <form>
+            <>
                 <h3>Sign In</h3>
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
+                    <input type="email" onChange={this.handleEmailChange} className="form-control" placeholder="Enter email" />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input type="password" onChange={this.handlePasswordChange} className="form-control" placeholder="Enter password" />
                 </div>
 
                 <div className="form-group">
@@ -24,11 +60,11 @@ export class Login extends Component {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                <button type="submit" onClick={this.handleSubmit} className="btn btn-primary btn-block">Sign In</button>
                 <p className="forgot-password text-right">
                     Forgot <a href="#">password?</a>
                 </p>
-            </form>
+            </>
         )
     }
 }
