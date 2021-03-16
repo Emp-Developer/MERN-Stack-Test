@@ -8,6 +8,6 @@ export class Forgot extends Component {
             </div>
         )
     }
-}
+} 
 
 export default Forgot
