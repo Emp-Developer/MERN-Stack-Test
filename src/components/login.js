@@ -8,14 +8,13 @@ export class Login extends Component {
             email: "",
             password: ""
         }
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleEmailChange(e) {
+    handleChange(e) {
         this.setState({
-            email: e.target.value
+            [e.target.state]: e.target.value
         })
     }
     handlePasswordChange(e) {
@@ -32,7 +31,7 @@ export class Login extends Component {
         axios.post("http://localhost:4000/api/users/login", data)
             .then((res) => {
                 console.log(data.email);
-                window.location.href = "/dashboard"
+                window.location.href = "/"
             })
             .catch((e) => {
 
@@ -45,12 +44,12 @@ export class Login extends Component {
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" onChange={this.handleEmailChange} className="form-control" placeholder="Enter email" />
+                    <input type="email" onChange={this.handleChange} className="form-control" placeholder="Enter email" />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" onChange={this.handlePasswordChange} className="form-control" placeholder="Enter password" />
+                    <input type="password" onChange={this.handleChange} className="form-control" placeholder="Enter password" />
                 </div>
 
                 <div className="form-group">
