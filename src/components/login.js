@@ -8,13 +8,14 @@ export class Login extends Component {
             email: "",
             password: ""
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(e) {
+    handleEmailChange(e) {
         this.setState({
-            [e.target.state]: e.target.value
+            email: e.target.value
         })
     }
     handlePasswordChange(e) {
@@ -44,12 +45,12 @@ export class Login extends Component {
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" onChange={this.handleChange} className="form-control" placeholder="Enter email" />
+                    <input type="email" onChange={this.handleEmailChange} className="form-control" placeholder="Enter email" />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" onChange={this.handleChange} className="form-control" placeholder="Enter password" />
+                    <input type="password" onChange={this.handlePasswordChange} className="form-control" placeholder="Enter password" />
                 </div>
 
                 <div className="form-group">
