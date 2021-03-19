@@ -1,30 +1,20 @@
-import React, { Component } from 'react'
+import React, { useState, Component } from 'react'
+import Cookies from 'js-cookie'
 import axios from 'axios'
 
-export class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            password: ""
-        }
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+const AuthApi = React.createContext();
 
-    handleEmailChange(e) {
-        this.setState({
-            email: e.target.value
-        })
-    }
-    handlePasswordChange(e) {
-        this.setState({
-            password: e.target.value
-        })
-    }
-    handleSubmit(e) {
+
+const Login = () => {
+    const Auth = React.useContext(AuthApi);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("")
+   
+    const handleSubmit = (e) => {
         e.preventDefault();
+        Auth.setAuth(true)
+        Cookies.set("user", "loginTrue")
+        
         const data = {
             email: this.state.email,
             password: this.state.password
@@ -38,19 +28,19 @@ export class Login extends Component {
 
             })
     }
-    render() {
+    
         return (
             <>
                 <h3>Sign In</h3>
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" onChange={this.handleEmailChange} className="form-control" placeholder="Enter email" />
+                    <input type="email" onChange={e => setEmail(e.target.value)} className="form-control" placeholder="Enter email" />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" onChange={this.handlePasswordChange} className="form-control" placeholder="Enter password" />
+                    <input type="password" onChange={e => setPassword(e.target.value)} className="form-control" placeholder="Enter password" />
                 </div>
 
                 <div className="form-group">
@@ -60,13 +50,13 @@ export class Login extends Component {
                     </div>
                 </div>
 
-                <button type="submit" onClick={this.handleSubmit} className="btn btn-primary btn-block">Sign In</button>
+                <button type="submit" onClick={handleSubmit} className="btn btn-primary btn-block">Sign In</button>
                 <p className="forgot-password text-right">
                     Forgot <a href="#">password?</a>
                 </p>
             </>
         )
-    }
+   
 }
 
 export default Login

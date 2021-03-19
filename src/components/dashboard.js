@@ -1,37 +1,20 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React from 'react'
+import Cookies from 'js-cookie'
 
-export class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: []
-        }
+const AuthApi = React.createContext();
+
+const Dashboard = () => {
+    const Auth = React.useContext(AuthApi)
+    const handleOnClick = () => {
+        Auth.setAuth(false);
+        Cookies.remove("user");
     }
-    componentDidMount() {
-        this.getUsers = setInterval(() => {
-            axios
-                .get('http://localhost:4000/api/users/register')
-                .then((res) => {
-                    this.setState({
-                        users: res.data,
-                    })
-                }).catch((err) => {
-                    
-                });
-        }, 500);
-    }
-    componentWillUnmount() {
-        clearInterval(this.getUsers)
-    }
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
+    return(
+        <div>
+            <h1>Dashboard</h1>
+            <button onClick={handleOnClick}>Logout</button>
+        </div>
+    )
 }
 
 export default Dashboard
-

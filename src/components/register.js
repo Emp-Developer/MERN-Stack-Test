@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { registerUser } from '../actions/authActions';
-import classnames from 'classnames';
-import { withRouter } from 'react-router';
 
 class Register extends Component {
     constructor(props) {
@@ -79,7 +74,6 @@ class Register extends Component {
         .catch((e)=>{
             window.alert("Error")
         })
-        // this.props.registerUser(data, this.props.history);
     }
     render() {
         return (
