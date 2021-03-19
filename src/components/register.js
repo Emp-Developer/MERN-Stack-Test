@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { registerUser } from '../actions/authActions';
+import classnames from 'classnames';
+import { withRouter } from 'react-router';
 
-class Signup extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
             first_name: "",
             last_name: "",
             email: "",
-            password: ""
+            password: "",
+            errors: {}
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFirstnameChange = this.handleFirstnameChange.bind(this);   
@@ -16,9 +22,23 @@ class Signup extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);     
     }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+          this.setState({
+            errors: nextProps.errors
+          });
+        }
+      }
+    static getDerivedStateFromProps (props, state) {
+        if(props.errors) {
+            return {
+                errors: props.errors
+            }
+        }
+    }
     // handleChange(e) {
     //     this.setState({ 
-    //         [e.target.state]: e.target.value            
+    //         [e.target.id]: e.target.value            
     //     });
     // }
     handleFirstnameChange(e) {
@@ -51,7 +71,7 @@ class Signup extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        axios.post("http://localhost:4000/api/users/signup",data )
+        axios.post("http://localhost:4000/api/users/register",data )
         .then((res)=>{
             window.location.href = "/";
             window.alert(data.email);
@@ -59,6 +79,7 @@ class Signup extends Component {
         .catch((e)=>{
             window.alert("Error")
         })
+        // this.props.registerUser(data, this.props.history);
     }
     render() {
         return (
@@ -94,4 +115,19 @@ class Signup extends Component {
     }
 }
 
-export default Signup
+export default Register;
+// Register.propTypes = {
+//     registerUser: PropTypes.func.isRequired,
+//     auth: PropTypes.object.isRequired,
+//     errors: PropTypes.object.isRequired
+// };
+
+// const mapStateToProps = state => ({
+//     auth: state.auth,
+//     errors: state.errors
+// });
+// export default connect (
+//     mapStateToProps,
+//     {registerUser}
+// )(withRouter(Register));
+

@@ -6,7 +6,7 @@ const passport = require("passport");
 
 const users = require("./routes/api/users");
 
-const UserModel = require('./models/userModel');
+const User = require("./models/userModel");
 
 const PORT = 4000;
 
@@ -37,12 +37,24 @@ app.use("/api/users", users);
 //     res.send(response);
 // })
 
-// app.post('/signup', async function (req, res) {
+// app.post('/register', async function (req, res) {
 //     const userInfo = req.body;
 //     console.log("SignupInfor", userInfo)
 //     const response = await UserModel.create(userInfo);
 //     res.send(response);
 // })
+
+var MongClient = require('mongodb').MongoClient;
+var url = require('./config/key').mongoURI;
+MongClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("myDB");
+    dbo.collection("usersCollection").find({}).toArray(function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        db.close();
+    });
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);

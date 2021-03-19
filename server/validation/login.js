@@ -13,7 +13,7 @@ module.exports = function validateLoginInput(data) {
         errors.email = "Email is required!";
     } else if(!Validator.isEmail(data.email)) {
         errors.email = "Email is invalid!";
-    }
+    } 
 
     // Check Password
     if(Validator.isEmpty(data.password)) {

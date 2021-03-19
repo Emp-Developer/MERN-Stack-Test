@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // import store from './store';
 
 import Login from './components/login';
-import Signup from './components/signup';
+import Register from './components/register';
 import Navigation from './components/navigation';
 import Dashboard from './components/dashboard';
 
@@ -20,10 +20,10 @@ function App() {
           <div className="auth-wrapper">
             <div className="auth-inner">
               <Switch>
-                {/* <Route path = '/' component={Signup} /> */}
+                {/* <Route path = '/' component={Register} /> */}
                 <Route exact path='/' component={Dashboard} />
                 <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
+                <Route path="/register" component={Register} />
               </Switch>
             </div>
           </div>
